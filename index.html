@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak from Saif</title>
+    <script defer>
+        const messages = [
+            "May this Eid bring happiness, success, and peace to your life!",
+            "Wishing you joy, prosperity, and endless blessings this Eid!",
+            "Eid Mubarak! May your home be filled with laughter and love!",
+            "May this Eid be filled with light, joy, and warmth for you and your family!",
+            "Eid is the time for sharing and caring. Wishing you a blessed Eid!"
+        ];
+
+        function displayEidMubarak() {
+            const params = new URLSearchParams(window.location.search);
+            const userName = params.get("name");
+            if (userName) {
+                document.getElementById("loading-overlay").style.display = "flex";
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.getElementById("eid-message").innerHTML = `🌙 Eid Mubarak, ${userName}! 🌙`;
+                document.getElementById("eid-text").innerHTML = randomMessage;
+                document.getElementById("eid-section").style.display = "block";
+                playEidMusic();
+            }
+        }
+
+        function playEidMusic() {
+            let audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387"); // Fast-loading Eid music
+            audio.play().then(() => {
+                document.getElementById("loading-overlay").style.display = "none";
+            }).catch(error => {
+                console.error("Music playback failed", error);
+                document.getElementById("loading-overlay").style.display = "none";
+            });
+        }
+
+        function generateLink() {
+            const userName = document.getElementById("user-name").value;
+            if (!userName) {
+                alert("Please enter your name!");
+                return;
+            }
+            window.location.href = `${window.location.pathname}?name=${encodeURIComponent(userName)}`;
+        }
+
+        window.onload = function() {
+            displayEidMubarak();
+            document.getElementById("user-name").value = "";
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* Blue gradient */
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
+            to { text-shadow: 0 0 25px rgba(255, 255, 255, 1); }
+        }
+        .eid-section {
+            display: none;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .input-container {
+            margin-top: 20px;
+        }
+        input {
+            padding: 12px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            border: none;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        button {
+            padding: 12px 18px;
+            font-size: 1.2rem;
+            background: #ffcc00;
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ffdd44;
+            transform: scale(1.1);
+        }
+        #loading-overlay {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            font-size: 2rem;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-overlay">🔄 Loading... Please wait for music 🎶</div>
+    <h1 class="title">🌙 Eid Mubarak from Saif 🌙</h1>
+    <h2>Enter Your Name</h2>
+    <div class="input-container">
+        <input type="text" id="user-name" placeholder="Enter your name">
+        <button onclick="generateLink()">OK</button>
+    </div>
+    
+    <div id="eid-section" class="eid-section">
+        <p id="eid-message"></p>
+        <p id="eid-text" style="font-size: 1.5rem; font-weight: normal; margin-top: 10px;"></p>
+    </div>
+</body>
+</html>
