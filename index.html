@@ -17,23 +17,11 @@
             const params = new URLSearchParams(window.location.search);
             const userName = params.get("name");
             if (userName) {
-                document.getElementById("loading-overlay").style.display = "flex";
-                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
                 document.getElementById("eid-message").innerHTML = `🌙 Eid Mubarak, ${userName}! 🌙`;
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
                 document.getElementById("eid-text").innerHTML = randomMessage;
                 document.getElementById("eid-section").style.display = "block";
-                playEidMusic();
             }
-        }
-
-        function playEidMusic() {
-            let audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387"); // Fast-loading Eid music
-            audio.play().then(() => {
-                document.getElementById("loading-overlay").style.display = "none";
-            }).catch(error => {
-                console.error("Music playback failed", error);
-                document.getElementById("loading-overlay").style.display = "none";
-            });
         }
 
         function generateLink() {
@@ -113,24 +101,9 @@
             background: #ffdd44;
             transform: scale(1.1);
         }
-        #loading-overlay {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            font-size: 2rem;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
     </style>
 </head>
 <body>
-    <div id="loading-overlay">🔄 Loading... Please wait for music 🎶</div>
     <h1 class="title">🌙 Eid Mubarak from Saif 🌙</h1>
     <h2>Enter Your Name</h2>
     <div class="input-container">
